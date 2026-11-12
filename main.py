@@ -80,3 +80,13 @@ def reset(body:Reset,authorization:str|None=Header(None)):
     with connect() as db:
         db.execute('UPDATE licenses SET device_id=NULL,activated_at=NULL WHERE id=? AND revoked=0',(body.id,));db.commit()
     return {'ok':True}
+
+from fastapi.responses import FileResponse
+
+@app.get("/sicario_app.exe")
+def download_app():
+    return FileResponse(
+        "sicario_app.exe",
+        media_type="application/octet-stream",
+        filename="sicario_app.exe"
+    )
