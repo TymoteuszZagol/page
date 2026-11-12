@@ -90,3 +90,9 @@ def download_app():
         media_type="application/octet-stream",
         filename="sicario_app.exe"
     )
+
+from fastapi.responses import HTMLResponse
+
+@app.get("/", response_class=HTMLResponse)
+def homepage():
+    return Path("index.html").read_text(encoding="utf-8")
