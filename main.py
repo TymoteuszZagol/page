@@ -96,3 +96,7 @@ from fastapi.responses import HTMLResponse
 @app.get("/", response_class=HTMLResponse)
 def homepage():
     return Path("index.html").read_text(encoding="utf-8")
+
+@app.get("/admin", include_in_schema=False)
+def admin_page():
+    return FileResponse("admin.html")
